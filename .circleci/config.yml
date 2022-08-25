@@ -1,14 +1,10 @@
 version: 2.1
 jobs:
-  checkout:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
   build:
     docker:
       - image: cimg/base:stable
     steps:
+      - checkout
       - run:
           name: "build"
           command: "npm i"
