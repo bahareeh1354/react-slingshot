@@ -37,8 +37,8 @@ workflows:
     jobs:
       - build
       - test
-        required:
+        requires:
           - build
       - analyze
-        required:
+        requires:
           - test
