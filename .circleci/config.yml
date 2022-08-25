@@ -10,16 +10,26 @@ jobs:
           command: "npm i"
       - run: 
           command: "npm run lint"
+      - save_cache: 
+          key: "npm package"
+          path: "/rc/node_modules"
   test:
     docker:
       - image: cimg/base:stable
     steps:
       - run:
-          command: "npm run test"
+          restore_cache:
+            key: "npm package"
+      - run: "npm i"
+      - run: "npm run test"
   analyze:
     docker:
       - image: cimg/base:stable
     steps:
+      - run:
+          restore_cache:
+            key: "npm package"
+      - run: "npm i"
       - run:
           command: "npm audit"
 workflows:
